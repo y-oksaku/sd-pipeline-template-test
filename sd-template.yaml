@@ -1,0 +1,41 @@
+namespace: y-oksaku
+name: sd-y-oksaku-pipeline-template-test
+version: '1.0.0'
+description: An example pipeline template for testing node.js files
+maintainer: foo@bar.com
+config:
+  shared:
+    image: node:20
+  annotations:
+    screwdriver.cd/chainPR: true
+  jobs:
+    main:
+      requires: [ ~commit, ~pr ]
+      steps:
+        - name: echo "pipeline template test"
+        - env
+        - export
+      annotations:
+        screwdriver.cd/displayName: "FOO"
+    build2:
+      requires: [ ~main ]
+      steps:
+        - name: echo "pipeline template test"
+        - env
+        - export
+    build3:
+      requires: [ ~main ]
+      steps:
+        - name: echo "pipeline template test"
+        - env
+        - export
+    detached:
+      requires: []
+      steps:
+        - env
+        - export
+    use-template:
+      requires: []
+      template: sd/noop@latest
+      steps:
+        - noop: echo "overwrite step"
