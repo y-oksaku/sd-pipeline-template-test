@@ -1,0 +1,25 @@
+shared:
+  image: node:20
+jobs:
+  # 1. Validate pipeline template
+  validate_template:
+    requires: [~pr, ~commit]
+    steps:
+      - install_prerequisites: npm install -g screwdriver-template-main
+      # a. Validate the default (sd-test/example-template) template
+      - validate_default_template: pipeline-template-validate
+
+  # 2a. Publish and tag the golang template in one job
+  # Note: We do not need to set SD_TEMPLATE_PATH since that template is in the default path (sd-template.yaml)
+  publish_default_template:
+    requires: [validate_template]
+    steps:
+      - install_prerequisites: npm install -g screwdriver-template-main
+      - publish:  pipeline-template-publish
+      # - tag: pipeline-template-tag --namespace kumada626 --name sd-kumada626-pipeline-template --version 1.0.2 --tag stable
+  remove:
+      steps:
+        - remove: npx -y -p screwdriver-template-main pipeline-template-remove --namespace kumada626 --name sd-kumada626-pipeline-template
+  remove_tag:
+      steps:
+        - remove_tag: npx -y -p screwdriver-template-main pipeline-template-remove-tag --namespace kumada626 --name sd-kumada626-pipeline-template --tag stable
