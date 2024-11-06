@@ -1,7 +1,7 @@
 template: y-oksaku/sd-y-oksaku-pipeline-template-test@1.0.0
-# annotations:
-#   screwdriver.cd/chainPR: false
-# jobs:
-#   main:
-#     annotations:
-#       screwdriver.cd/displayName: "OVERWRITE"
+annotations:
+  screwdriver.cd/chainPR: false
+jobs:
+  main:
+    annotations:
+      screwdriver.cd/displayName: "OVERWRITE"
