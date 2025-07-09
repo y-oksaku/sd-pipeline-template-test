@@ -6,6 +6,7 @@ maintainer: foo@bar.com
 config:
   shared:
     image: node:20
+    sourcePaths: ["pipeline-template-shared"]
   annotations:
     screwdriver.cd/chainPR: true
   jobs:
@@ -17,6 +18,7 @@ config:
         - export
       annotations:
         screwdriver.cd/displayName: "FOO"
+      sourcePaths: ["pipeline-template-job"]
     build2:
       requires: [ ~main ]
       steps:
