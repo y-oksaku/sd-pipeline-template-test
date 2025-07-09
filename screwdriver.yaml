@@ -1,7 +1,10 @@
-template: y-oksaku/sd-y-oksaku-pipeline-template-test@1.0.0
+template: y-oksaku/sd-y-oksaku-pipeline-template-test@latest
 annotations:
   screwdriver.cd/chainPR: false
+shared:
+  sourcePaths: ["shared"]
 jobs:
   main:
     annotations:
       screwdriver.cd/displayName: "OVERWRITE"
+    sourcePaths: ["job"]
